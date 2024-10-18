@@ -4,7 +4,8 @@
 readme_content_tshirt_with_link = "https://word-live-docs.vercel.app/"
 
 ## Description
-This project was created to help improve programming skills and explore new technologies. It focuses on building a live document editor where multiple users can collaborate in real-time. You can follow the original tutorial on [YouTube](https://www.youtube.com/@javascriptmastery).
+This project was created to help improve programming skills and explore new technologies. It focuses on building a live document editor where multiple users can collaborate in real-time. You can follow the original tutorial on [
+JavaScript Mastery](https://www.youtube.com/@javascriptmastery).
 
 ## Features
 The application offers the following key features:
