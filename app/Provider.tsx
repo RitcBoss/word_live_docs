@@ -7,7 +7,7 @@ import { ClientSideSuspense, LiveblocksProvider } from '@liveblocks/react/suspen
 import { ReactNode } from 'react';
 
 function Provider({ children }: { children: ReactNode }) {
-    const {user: clerkUser} = useUser();
+    const { user: clerkUser } = useUser();
     return (
         <LiveblocksProvider
             authEndpoint="/api/liveblocks-auth"
@@ -16,14 +16,19 @@ function Provider({ children }: { children: ReactNode }) {
                 return users;
             }}
             resolveMentionSuggestions={async ({ text, roomId }) => {
+                if (!clerkUser?.emailAddresses || clerkUser.emailAddresses.length === 0) {
+                    return []; 
+                }
+
                 const roomUsers = await getDocumentUsers({
                     roomId,
-                    currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+                    currentUser: clerkUser.emailAddresses[0].emailAddress,
                     text,
-                })
+                });
 
-                return roomUsers
+                return roomUsers;
             }}
+
         >
             <ClientSideSuspense fallback={<Loader />}>
                 {children}

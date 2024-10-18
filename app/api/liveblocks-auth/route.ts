@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 
-export async function POST(request: Request) {
+export async function POST() {
     const clerkUser = await currentUser();
 
     if (!clerkUser) redirect('/sign-in');
@@ -22,7 +22,6 @@ export async function POST(request: Request) {
         },
     }
 
-    // Create an ID token for the user
     const { body, status } = await liveblocks.identifyUser(
         {
             userId: user.info.email,
@@ -33,3 +32,4 @@ export async function POST(request: Request) {
 
     return new Response(body, { status });
 }
+

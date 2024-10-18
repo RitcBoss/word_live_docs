@@ -12,20 +12,31 @@ import { dateConverter } from '@/lib/utils'
 import { DeleteModal } from '@/components/DeleteModal'
 import Notification from '@/components/Notification'
 
+interface Document {
+  id: string;
+  metadata: {
+    title: string;
 
+  };
+  createdAt: string;
+}
+
+interface RoomDocuments {
+  data: Document[];
+}
 const Home = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect('/sign-in')
 
 
-  const roomDocuments = await getDocuments(clerkUser.emailAddresses[0].emailAddress);
+  const roomDocuments: RoomDocuments = await getDocuments(clerkUser.emailAddresses[0].emailAddress);
 
   return (
 
     <main className='home-container'>
       <Header className='sticky left-0 top-0'>
         <div className='flex items-center gap-2 lg:gap-4'>
-          <Notification/>
+          <Notification />
           <SignedIn>
             <UserButton />
           </SignedIn>
@@ -42,7 +53,7 @@ const Home = async () => {
             />
           </div>
           <ul className='document-ul'>
-            {roomDocuments.data.map(({ id, metadata, createdAt }: any) => (
+            {roomDocuments.data.map(({ id, metadata, createdAt }) => (
               <li key={id} className='document-list-item'>
                 <Link href={`/documents/${id}`} className='flex flex-1 items-center gap-4'>
                   <div className='hidden rounded-md bg-dark-500 p-2 sm:block'>
