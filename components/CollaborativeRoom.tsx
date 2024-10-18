@@ -51,13 +51,13 @@ const CollaborativeRoom = ({ roomId, roomMetadata, users, currentUserType }: Col
         return () => {
             document.addEventListener('mousedown', handleClickOutside);
         }
-    }, [])
+    }, [editing])
 
     useEffect(() => {
         if (editing && inputRef.current) {
             inputRef.current.focus();
         }
-    },[])
+    },[editing])
 
 
 
